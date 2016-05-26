@@ -72,6 +72,9 @@ public class CalcPrimes implements Callable<String> {
 		return sendBack;
 	}
 	
+	/**
+	 * calcSeriesOfPrime
+	 */
 	private void calcSeriesOfPrime(){
 		try{
 			StringBuffer sBuf = new StringBuffer();
