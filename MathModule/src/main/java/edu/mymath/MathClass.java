@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import org.apache.log4j.Logger;
 
 public class MathClass {
 
+	final static Logger log  = Logger.getLogger(edu.mymath.MathClass.class);
 	ArrayList<Integer> dDataList = new ArrayList<>();
 	
 	/**
@@ -38,6 +40,7 @@ public class MathClass {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Start");
+		log.info("MathClass.main:start");
 		try{
 			final ExecutorService expool;
 			final Future<String> sData;
@@ -49,11 +52,15 @@ public class MathClass {
 			dDList.add(7);
 			dDList.add(3);
 			expool = Executors.newFixedThreadPool(5);
-			sData = expool.submit(new CalcPrimes(100, false));
+			log.info("MathClass.main:create thread pool");
+			sData = expool.submit(new CalcPrimes(100, true));
+			log.info("MathClass.main:call class");
 			System.out.println("Data: " + sData.get());
 			Thread.sleep(1000);
 			expool.shutdown();
+			log.info("MathClass.main:close");
 		}catch(Exception ex){
+			log.info("ERROR MathClass:main: " + ex.getMessage());
 			System.out.println("Error:MathClass.main: "+ex.getMessage());
 		}
 		
