@@ -10,7 +10,7 @@ public class TestClass {
 		System.out.println(tuna);
 		System.out.println(bass);
 		Utskrift prv = new Utskrift();
-		prv.setString("mats-ola");
+		prv.setString("mats-ola 20160527 09:02");
 		System.out.println(prv.skrivUt());		
 	}
 }
