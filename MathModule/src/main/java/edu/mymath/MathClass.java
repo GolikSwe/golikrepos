@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 
 public class MathClass {
@@ -44,19 +45,20 @@ public class MathClass {
 		try{
 			final ExecutorService expool;
 			final Future<String> sData;
-			ArrayList<Integer> dDList = new ArrayList<>();
-			dDList.add(2);
-			dDList.add(3);
-			dDList.add(1);
-			dDList.add(1);
-			dDList.add(7);
-			dDList.add(3);
+			ArrayList<Integer> iList = new ArrayList<>();
+			iList.add(2);
+			iList.add(3);
+			iList.add(1);
+			iList.add(1);
+			iList.add(7);
+			iList.add(3);
 			expool = Executors.newFixedThreadPool(5);
 			log.info("MathClass.main:create thread pool");
-			sData = expool.submit(new CalcPrimes(20, true));
+//			sData = expool.submit(new CalcPrimes(20, true));
+			sData = expool.submit(new CalcStat("geomean",iList));
 			log.info("MathClass.main:call class");
 			System.out.println("Data: " + sData.get());
-			Thread.sleep(1000);
+			expool.awaitTermination(3, TimeUnit.SECONDS);
 			expool.shutdown();
 			log.info("MathClass.main:close");
 		}catch(Exception ex){
