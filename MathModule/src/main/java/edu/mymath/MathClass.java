@@ -55,7 +55,7 @@ public class MathClass {
 			expool = Executors.newFixedThreadPool(5);
 			log.info("MathClass.main:create thread pool");
 //			sData = expool.submit(new CalcPrimes(20, true));
-			sData = expool.submit(new CalcStat("geomean",iList));
+			sData = expool.submit(new CalcStat("mean",iList));
 			log.info("MathClass.main:call class");
 			System.out.println("Data: " + sData.get());
 			expool.awaitTermination(3, TimeUnit.SECONDS);

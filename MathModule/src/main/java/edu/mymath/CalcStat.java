@@ -3,7 +3,8 @@ package edu.mymath;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import org.apache.log4j.Logger;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 /**
@@ -55,6 +56,8 @@ public class CalcStat implements Callable<String> {
 	 */
 	private String doStat(String sInput){
 		log.info("CalcStat.doStat:start");
+		JSONObject jObj = new JSONObject();
+		JSONArray jList = new JSONArray();
 		try{			
 			switch(sInput){
 				case "mean":{
@@ -80,10 +83,15 @@ public class CalcStat implements Callable<String> {
 			log.info("CalcStat.doValue: " + sTypeOfStat +" : "+ dValue);
 			if(true == sTypeOfStat.contains("USE:")){
 				log.info("CalcStat.doStat:stop");
-				return sTypeOfStat;
+				jList.add(sTypeOfStat);
+				jObj.put("Error", sTypeOfStat);
+				return jObj.toJSONString();
 			} else{
 				log.info("CalcStat.doStat:stop");
-				return sTypeOfStat +" : "+ Double.toString(dValue);
+				jList.add(dValue);
+				jObj.put(sTypeOfStat, dValue);
+				return jObj.toJSONString();
+				//return sTypeOfStat +" : "+ Double.toString(dValue);
 			}
 		}catch(Exception ex){
 			System.out.println("ERROR:CalcStat.doStat: " +ex.toString());
