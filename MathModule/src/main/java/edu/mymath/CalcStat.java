@@ -54,6 +54,7 @@ public class CalcStat implements Callable<String> {
 	 * @param sInput, string
 	 * @return string
 	 */
+	@SuppressWarnings("unchecked")
 	private String doStat(String sInput){
 		log.info("CalcStat.doStat:start");
 		JSONObject jObj = new JSONObject();

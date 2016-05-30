@@ -11,7 +11,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import org.apache.log4j.Logger;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.apache.commons.math3.primes.Primes;
 
 public class CalcPrimes implements Callable<String> {
@@ -20,6 +21,10 @@ public class CalcPrimes implements Callable<String> {
 	private boolean bCalcSerieOrNr = false;
 	private boolean bWriteDownData = false;
 	private String sPath = "/home/goran/testing/logs/test.txt";
+	
+	//instans
+	JSONObject jObj = new JSONObject();
+	JSONArray jList = new JSONArray();
 	
 	//logger
 	final static Logger log = Logger.getLogger(edu.mymath.CalcPrimes.class);
@@ -55,10 +60,9 @@ public class CalcPrimes implements Callable<String> {
 	@Override
 	public String call(){
 		log.info("CalcPrimes.call:start");
-		if(true ==  bCalcSerieOrNr){
-			calcSeriesOfPrime();
+		if(true ==  bCalcSerieOrNr){			
 			log.info("CalcPrimes.call:stop");
-			return "SeriesOfPrime";
+			return calcSeriesOfPrime();
 		}else{
 			log.info("CalcPrimes.call:stop");
 			return isThisPrime();
@@ -69,16 +73,21 @@ public class CalcPrimes implements Callable<String> {
 	 * isThisPrime
 	 * @return String
 	 */
+	@SuppressWarnings("unchecked")
 	private String isThisPrime(){
 		log.info("CalcPrimes.isThisPrime:start");
 		try{
 			String sendBack;
 			boolean bol = Primes.isPrime(iThisPrimenr);
 			if(false == bol){
-				sendBack = "This i not a prime: " +iThisPrimenr+ "\n Nearest prime is: " + Primes.nextPrime(iThisPrimenr);
+				jList.add("This i not a prime: " +iThisPrimenr);
+				jList.add("Nearest prime is: " + Primes.nextPrime(iThisPrimenr));
+				jObj.put("Prime", jList);
+				sendBack = jObj.toJSONString();
 				log.info("CalcPrimes.isThisPrime:Data: " +sendBack);
 			}else{
-				sendBack = "This is a prime: " +iThisPrimenr;
+				jObj.put("Prime", "This is a prime: " +iThisPrimenr);
+				sendBack = jObj.toJSONString();
 				log.info("CalcPrimes.isThisPrime:Data: " +sendBack);
 			}
 			log.info("CalcPrimes.isThisPrime:stop");
@@ -93,7 +102,8 @@ public class CalcPrimes implements Callable<String> {
 	/**
 	 * calcSeriesOfPrime
 	 */
-	private void calcSeriesOfPrime(){
+	@SuppressWarnings("unchecked")
+	private String calcSeriesOfPrime(){
 		log.info("CalcPrimes.calcSeriesOfPrime:start");
 		try{
 			int j = 0;
@@ -108,11 +118,21 @@ public class CalcPrimes implements Callable<String> {
 			}//end for
 			log.info("CalcPrimes.isThisPrime: nr of count: " +j);
 			//write
-			writeDown(sBuf);
-			log.info("CalcPrimes.calcSeriesOfPrime:stop");
+			boolean bol = writeDown(sBuf);
+			if(true == bol){
+				log.info("CalcPrimes.calcSeriesOfPrime:stop");
+				jObj.put("Primes", "Write primes to file... succeeded");
+				return jObj.toJSONString();
+			}else{
+				log.info("CalcPrimes.calcSeriesOfPrime:stop");
+				jObj.put("Primes", "Write primes to file... NOT succeeded");
+				return jObj.toJSONString();
+			}
+			
 		}catch(Exception ex){
 			System.out.println("ERROR:CalcPrimes.isThisPrime: " +ex.toString());
 			log.info("ERROR:CalcPrimes.isThisPrime: " +ex.toString());
+			return "";
 		}
 	}
 	
@@ -120,7 +140,7 @@ public class CalcPrimes implements Callable<String> {
 	 * writeDown
 	 * @param sInput string buffer
 	 */
-	private void writeDown(StringBuffer sInput){
+	private boolean writeDown(StringBuffer sInput){
 		log.info("CalcPrimes.writeDown:start");
 		try{
 			Path pCreateFile = Paths.get(sPath);
@@ -141,6 +161,8 @@ public class CalcPrimes implements Callable<String> {
 		}catch(IOException ioex){
 			System.out.println("ERROR:CalcPrimes.writeDown: " +ioex.toString());
 			log.info("ERROR:CalcPrimes.writeDown: " +ioex.toString());
+			return false;
 		}
+		return true;
 	}
 }

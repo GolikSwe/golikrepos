@@ -4,7 +4,6 @@
  */
 package edu.mymath;
 
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,8 +53,8 @@ public class MathClass {
 			iList.add(3);
 			expool = Executors.newFixedThreadPool(5);
 			log.info("MathClass.main:create thread pool");
-//			sData = expool.submit(new CalcPrimes(20, true));
-			sData = expool.submit(new CalcStat("mean",iList));
+			sData = expool.submit(new CalcPrimes(23, true));
+//			sData = expool.submit(new CalcStat("mean",iList));
 			log.info("MathClass.main:call class");
 			System.out.println("Data: " + sData.get());
 			expool.awaitTermination(3, TimeUnit.SECONDS);
