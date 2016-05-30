@@ -53,7 +53,7 @@ public class MathClass {
 			dDList.add(3);
 			expool = Executors.newFixedThreadPool(5);
 			log.info("MathClass.main:create thread pool");
-			sData = expool.submit(new CalcPrimes(100, true));
+			sData = expool.submit(new CalcPrimes(20, true));
 			log.info("MathClass.main:call class");
 			System.out.println("Data: " + sData.get());
 			Thread.sleep(1000);
