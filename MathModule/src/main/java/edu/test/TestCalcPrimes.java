@@ -59,7 +59,7 @@ public class TestCalcPrimes {
 		Object obj = jParser.parse(jString);
 		JSONObject jObj = (JSONObject) obj;
 		String outPut = jObj.get("Primes").toString();
-		System.out.println("1: "+outPut);
+		System.out.println("2: "+outPut);
 		assertEquals(sTestValue, outPut);
 		expool.awaitTermination(2, TimeUnit.SECONDS);
 		expool.shutdown();				
