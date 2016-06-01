@@ -1,7 +1,7 @@
-package edu.mymath;
+package edu.test;
 
 import static org.junit.Assert.*;
-
+import edu.mymath.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -16,13 +16,19 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
-public class MathTest {
+import edu.mymath.CalcStat;
 
-//	ExecutorService expool;
-//	JSONObject jObj = null;
-//	JSONArray jList = new JSONArray();
+public class TestCalcStat {
+
+	/**
+	 * test1
+	 * @throws ParseException
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	@Test
 	public void test1() throws ParseException, InterruptedException, ExecutionException {	
+		String sTestValue = "20.5";
 		final ExecutorService expool;
 		final Future<String> sData;
 		ArrayList<Integer> iList = new ArrayList<>();
@@ -41,12 +47,20 @@ public class MathTest {
 		JSONObject jObj = (JSONObject) obj;
 		String outPut = jObj.get("mean").toString();
 		System.out.println("1: "+outPut);
-		assertEquals("20.5", outPut);
+		assertEquals(sTestValue, outPut);
 		expool.awaitTermination(2, TimeUnit.SECONDS);
 		expool.shutdown();			
 	}
+	
+	/**
+	 * test2
+	 * @throws ParseException
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	@Test
 	public void test2() throws ParseException, InterruptedException, ExecutionException{
+		String sTestValue = "11.533963316506613";
 		final ExecutorService expool;
 		final Future<String> sData;
 		ArrayList<Integer> iList = new ArrayList<>();
@@ -55,7 +69,7 @@ public class MathTest {
 		iList.add(11);
 		iList.add(14);
 		iList.add(7);
-		iList.add(12);
+		iList.add(14);
 		//CalcStat csTest = new CalcStat("mean", iList);
 		expool = Executors.newFixedThreadPool(2);
 		sData = expool.submit(new CalcStat("geomean",iList));
@@ -65,7 +79,7 @@ public class MathTest {
 		JSONObject jObj = (JSONObject) obj;
 		String outPut = jObj.get("geometric mean").toString();
 		System.out.println("2: "+outPut);
-	assertEquals("2.239039511702414", outPut);
+	assertEquals(sTestValue, outPut);
 		expool.awaitTermination(2, TimeUnit.SECONDS);
 		expool.shutdown();		
 	}
