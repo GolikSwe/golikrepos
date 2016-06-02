@@ -96,7 +96,7 @@ public class CalcStat implements Callable<String> {
 			}
 		}catch(Exception ex){
 			System.out.println("ERROR:CalcStat.doStat: " +ex.toString());
-			log.info("ERROR:CalcStat.doStat: " +ex.toString());
+			log.error("ERROR:CalcStat.doStat: " +ex.toString());
 			return "ERROR";
 		}	
 	}

@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 
 /**
  * MathClass
- * @author goran
+ * @author Goran Lindqvist
  *
  */
 public class MathClass {
@@ -59,8 +59,12 @@ public class MathClass {
 			iList.add(14);
 			expool = Executors.newFixedThreadPool(5);
 			log.info("MathClass.main:create thread pool");
-			sData = expool.submit(new CalcPrimes(11, false));
+			//c1
+//			sData = expool.submit(new CalcPrimes(11, false));
+			//c2
 //			sData = expool.submit(new CalcStat("geomean",iList));
+			//c3
+			sData = expool.submit(new CalcArithmetic(7, 2, "div"));
 			log.info("MathClass.main:call class");
 			System.out.println("Data: " + sData.get());
 			expool.awaitTermination(3, TimeUnit.SECONDS);

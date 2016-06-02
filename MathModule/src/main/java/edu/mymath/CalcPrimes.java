@@ -134,7 +134,7 @@ public class CalcPrimes implements Callable<String> {
 			
 		}catch(Exception ex){
 			System.out.println("ERROR:CalcPrimes.isThisPrime: " +ex.toString());
-			log.info("ERROR:CalcPrimes.isThisPrime: " +ex.toString());
+			log.error("ERROR:CalcPrimes.isThisPrime: " +ex.toString());
 			return "";
 		}
 	}
