@@ -15,11 +15,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.apache.commons.math3.primes.Primes;
 
+/**
+ * CalcPrimes
+ * @author goran
+ *
+ */
 public class CalcPrimes implements Callable<String> {
 
 	private final int iThisPrimenr;
 	private boolean bCalcSerieOrNr = false;
-	private boolean bWriteDownData = false;
 	private String sPath = "/home/goran/testing/logs/test.txt";
 	
 	//instans
@@ -49,7 +53,6 @@ public class CalcPrimes implements Callable<String> {
 	 */
 	public CalcPrimes(int iNr, boolean bWrite, boolean bSerieOrNr, String sFullPathToTxt) {
 		this.iThisPrimenr = iNr;
-		this.bWriteDownData = bWrite;
 		this.bCalcSerieOrNr = bSerieOrNr;
 		this.sPath = sFullPathToTxt;
 	}

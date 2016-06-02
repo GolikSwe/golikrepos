@@ -1,16 +1,12 @@
 package edu.test;
 
 import static org.junit.Assert.*;
-import edu.mymath.*;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -18,6 +14,11 @@ import org.junit.Test;
 
 import edu.mymath.CalcStat;
 
+/**
+ * TestCalcStat
+ * @author Goran Lindqvist
+ *
+ */
 public class TestCalcStat {
 
 	/**

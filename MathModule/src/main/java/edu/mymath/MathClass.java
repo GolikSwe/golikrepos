@@ -11,6 +11,11 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 
+/**
+ * MathClass
+ * @author goran
+ *
+ */
 public class MathClass {
 
 	final static Logger log  = Logger.getLogger(edu.mymath.MathClass.class);
@@ -36,6 +41,7 @@ public class MathClass {
 	
 	/**
 	 * main
+	 * @see Just for test 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -53,7 +59,7 @@ public class MathClass {
 			iList.add(14);
 			expool = Executors.newFixedThreadPool(5);
 			log.info("MathClass.main:create thread pool");
-			sData = expool.submit(new CalcPrimes(11, true));
+			sData = expool.submit(new CalcPrimes(11, false));
 //			sData = expool.submit(new CalcStat("geomean",iList));
 			log.info("MathClass.main:call class");
 			System.out.println("Data: " + sData.get());

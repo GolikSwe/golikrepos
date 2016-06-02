@@ -10,7 +10,7 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 /**
  * CalcStat
  * Simple statistics module
- * @author goran l
+ * @author Goran Lindqvist
  *
  */
 public class CalcStat implements Callable<String> {

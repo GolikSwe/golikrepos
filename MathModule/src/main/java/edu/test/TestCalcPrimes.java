@@ -1,3 +1,4 @@
+
 package edu.test;
 
 import static org.junit.Assert.*;
@@ -13,6 +14,10 @@ import org.json.simple.parser.ParseException;
 import org.junit.Test;
 import edu.mymath.CalcPrimes;
 
+/**
+ * TestCalcPrimes
+ * @author Goran Lindqvist
+ */
 public class TestCalcPrimes {
 
 	/**
