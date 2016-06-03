@@ -22,7 +22,7 @@ import edu.mymath.CalcStat;
 public class TestCalcStat {
 
 	/**
-	 * test1
+	 * TestCalcStat:test1
 	 * @throws ParseException
 	 * @throws InterruptedException
 	 * @throws ExecutionException
@@ -47,14 +47,14 @@ public class TestCalcStat {
 		Object obj = jParser.parse(jString);
 		JSONObject jObj = (JSONObject) obj;
 		String outPut = jObj.get("mean").toString();
-		System.out.println("1: "+outPut);
+		System.out.println("1_TestCalcStat: "+outPut);
 		assertEquals(sTestValue, outPut);
 		expool.awaitTermination(2, TimeUnit.SECONDS);
 		expool.shutdown();			
 	}
 	
 	/**
-	 * test2
+	 * TestCalcStat:test2
 	 * @throws ParseException
 	 * @throws InterruptedException
 	 * @throws ExecutionException
@@ -79,7 +79,7 @@ public class TestCalcStat {
 		Object obj = jParser.parse(jString);
 		JSONObject jObj = (JSONObject) obj;
 		String outPut = jObj.get("geometric mean").toString();
-		System.out.println("2: "+outPut);
+		System.out.println("2_TestCalcStat: "+outPut);
 	assertEquals(sTestValue, outPut);
 		expool.awaitTermination(2, TimeUnit.SECONDS);
 		expool.shutdown();		

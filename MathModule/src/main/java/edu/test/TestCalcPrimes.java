@@ -21,7 +21,7 @@ import edu.mymath.CalcPrimes;
 public class TestCalcPrimes {
 
 	/**
-	 * test1
+	 * TestCalcStat:test1
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 * @throws ParseException
@@ -39,14 +39,14 @@ public class TestCalcPrimes {
 		Object obj = jParser.parse(jString);
 		JSONObject jObj = (JSONObject) obj;
 		String outPut = jObj.get("Prime").toString();
-		System.out.println("1: "+outPut);
+		System.out.println("1_TestCalcStat: "+outPut);
 		assertEquals(sTestValue, outPut);
 		expool.awaitTermination(2, TimeUnit.SECONDS);
 		expool.shutdown();				
 	}
 	
 	/**
-	 * test2
+	 * TestCalcStat:test2
 	 * @throws InterruptedException
 	 * @throws ParseException
 	 * @throws ExecutionException
@@ -64,7 +64,7 @@ public class TestCalcPrimes {
 		Object obj = jParser.parse(jString);
 		JSONObject jObj = (JSONObject) obj;
 		String outPut = jObj.get("Primes").toString();
-		System.out.println("2: "+outPut);
+		System.out.println("2_TestCalcStat: "+outPut);
 		assertEquals(sTestValue, outPut);
 		expool.awaitTermination(2, TimeUnit.SECONDS);
 		expool.shutdown();				

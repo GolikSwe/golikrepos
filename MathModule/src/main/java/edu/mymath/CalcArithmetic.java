@@ -30,9 +30,10 @@ public class CalcArithmetic implements Callable<String> {
 		this.sOpr = opr;
 	}
 	
-	
+	/**
+	 * call
+	 */
 	public String call() {
-	
 		return simpleCalc(sOpr);
 	}
 	
@@ -46,7 +47,6 @@ public class CalcArithmetic implements Callable<String> {
 		log.info("CalcArithmetic.simpleCalc:start");
 		double dRes = 0;
 		String sMathOpr = "";
-		String sValueBack;
 		//instans
 		JSONObject jObj = new JSONObject();
 		JSONArray jList = new JSONArray();		
@@ -98,7 +98,9 @@ public class CalcArithmetic implements Callable<String> {
 		}catch(Exception ex){
 			System.err.println("ERROR:CalcArithmetic.simpleCalc: " +ex.toString());
 			log.error("ERROR:CalcArithmetic.simpleCalc: " +ex.toString());
-			return sValueBack = "ERROR:CalcArithmetic.simpleCalc: " +ex.toString();
+			jList.add("ERROR:CalcArithmetic.simpleCalc: " +ex.toString());
+			jObj.put("ERROR", jList);
+			return jObj.toJSONString();
 		}
 		log.info("CalcArithmetic.simpleCalc:stop");
 		return jObj.toJSONString();

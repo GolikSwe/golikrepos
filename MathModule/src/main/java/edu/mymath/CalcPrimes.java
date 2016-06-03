@@ -1,6 +1,5 @@
 package edu.mymath;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousFileChannel;
@@ -17,7 +16,7 @@ import org.apache.commons.math3.primes.Primes;
 
 /**
  * CalcPrimes
- * @author goran
+ * @author Goran Lindqvist
  *
  */
 public class CalcPrimes implements Callable<String> {

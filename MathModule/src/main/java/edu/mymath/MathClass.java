@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 /**
  * MathClass
  * @author Goran Lindqvist
- *
  */
 public class MathClass {
 
