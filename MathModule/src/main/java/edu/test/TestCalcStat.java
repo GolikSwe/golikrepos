@@ -84,4 +84,38 @@ public class TestCalcStat {
 		expool.awaitTermination(2, TimeUnit.SECONDS);
 		expool.shutdown();		
 	}
+
+	/**
+	 * TestCalcStat:test3
+	 * @throws ParseException
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
+	@Test
+	public void test3() throws ParseException, InterruptedException, ExecutionException{
+		String sTestValue = "1.2678571428571428";
+		final ExecutorService expool;
+		final Future<String> sData;
+		ArrayList<Integer> iList = new ArrayList<>();
+		iList.add(8);
+		iList.add(7);
+		iList.add(6);
+		iList.add(5);
+		iList.add(7);
+		iList.add(8);
+		iList.add(8);
+		iList.add(6);
+		//CalcStat csTest = new CalcStat("mean", iList);
+		expool = Executors.newFixedThreadPool(2);
+		sData = expool.submit(new CalcStat("variance",iList));
+		String jString = sData.get();
+		JSONParser jParser =  new JSONParser();
+		Object obj = jParser.parse(jString);
+		JSONObject jObj = (JSONObject) obj;
+		String outPut = jObj.get("variance").toString();
+		System.out.println("3_TestCalcStat: "+outPut);
+	assertEquals(sTestValue, outPut);
+		expool.awaitTermination(2, TimeUnit.SECONDS);
+		expool.shutdown();		
+	}	
 }

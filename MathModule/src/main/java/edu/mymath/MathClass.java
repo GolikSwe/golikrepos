@@ -61,9 +61,9 @@ public class MathClass {
 			//c1
 //			sData = expool.submit(new CalcPrimes(11, false));
 			//c2
-//			sData = expool.submit(new CalcStat("geomean",iList));
+			sData = expool.submit(new CalcStat("variance",iList));
 			//c3
-			sData = expool.submit(new CalcArithmetic(7, 2, "div"));
+//			sData = expool.submit(new CalcArithmetic(1267, 32, "div"));
 			log.info("MathClass.main:call class");
 			System.out.println("Data: " + sData.get());
 			expool.awaitTermination(3, TimeUnit.SECONDS);
