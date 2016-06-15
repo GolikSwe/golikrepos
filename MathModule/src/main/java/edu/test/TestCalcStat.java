@@ -41,7 +41,7 @@ public class TestCalcStat {
 		iList.add(24);
 		//CalcStat csTest = new CalcStat("mean", iList);
 		expool = Executors.newFixedThreadPool(2);
-		sData = expool.submit(new CalcStat("mean",iList));
+		sData = expool.submit(new CalcStat("mean",iList, true));
 		String jString = sData.get();
 		JSONParser jParser =  new JSONParser();
 		Object obj = jParser.parse(jString);
@@ -73,7 +73,7 @@ public class TestCalcStat {
 		iList.add(14);
 		//CalcStat csTest = new CalcStat("mean", iList);
 		expool = Executors.newFixedThreadPool(2);
-		sData = expool.submit(new CalcStat("geomean",iList));
+		sData = expool.submit(new CalcStat("geomean",iList,true));
 		String jString = sData.get();
 		JSONParser jParser =  new JSONParser();
 		Object obj = jParser.parse(jString);
@@ -107,7 +107,7 @@ public class TestCalcStat {
 		iList.add(6);
 		//CalcStat csTest = new CalcStat("mean", iList);
 		expool = Executors.newFixedThreadPool(2);
-		sData = expool.submit(new CalcStat("variance",iList));
+		sData = expool.submit(new CalcStat("variance",iList,false));
 		String jString = sData.get();
 		JSONParser jParser =  new JSONParser();
 		Object obj = jParser.parse(jString);

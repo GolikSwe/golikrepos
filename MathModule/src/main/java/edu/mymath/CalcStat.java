@@ -13,12 +13,14 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
  * @author Goran Lindqvist
  *
  */
-public class CalcStat implements Callable<String> {
+public class CalcStat extends Common implements Callable<String> {
 	
 //	private String sCallValueBack;
 	private String sSelectStat;
+	private Boolean bWrite;
 	private double dValue = 0;
-	private String sTypeOfStat;	
+	private String sTypeOfStat;
+	private String sPath = "/home/goran/testing/logs/test1.txt";
 	ArrayList<Integer> iCalcValues = new ArrayList<>();
 	//instans
 	DescriptiveStatistics stat = new DescriptiveStatistics();	
@@ -26,12 +28,14 @@ public class CalcStat implements Callable<String> {
 	
 	/**
 	 * constructor
-	 * @param sSelectCalcMethod
-	 * @param iList
+	 * @param sSelectCalcMethod, string.
+	 * @param iList, arraylist.
+	 * @param writeToFile, booolean.
 	 */
-	public CalcStat(String sSelectCalcMethod, ArrayList<Integer> iList){
+	public CalcStat(String sSelectCalcMethod, ArrayList<Integer> iList, Boolean writeToFile){
 		this.sSelectStat = sSelectCalcMethod;
 		this.iCalcValues = iList;
+		this.bWrite = writeToFile;
 		int i=0;
 		while (i< iList.size()) {	
 			stat.addValue(iCalcValues.get(i));
@@ -51,8 +55,8 @@ public class CalcStat implements Callable<String> {
 
 	/**
 	 * doStat
-	 * @param sInput, string
-	 * @return string
+	 * @param sInput, string.
+	 * @return string.
 	 */
 	@SuppressWarnings("unchecked")
 	private String doStat(String sInput){
@@ -88,9 +92,17 @@ public class CalcStat implements Callable<String> {
 				jObj.put("Error", sTypeOfStat);
 				return jObj.toJSONString();
 			} else{
-				log.info("CalcStat.doStat:stop");
 				jList.add(dValue);
 				jObj.put(sTypeOfStat, dValue);
+				if(true == bWrite){
+					StringBuffer sBuf = new StringBuffer();
+					sBuf.append("********************************").append("\n");
+					sBuf.append("********:" +sTypeOfStat+ ":********").append("\n");
+					sBuf.append(jObj.toJSONString());
+					writeDownToFile(sBuf,sPath);
+					log.info("CalcStat.doStat:write to file");	
+				}
+				log.info("CalcStat.doStat:stop");
 				return jObj.toJSONString();
 				//return sTypeOfStat +" : "+ Double.toString(dValue);
 			}

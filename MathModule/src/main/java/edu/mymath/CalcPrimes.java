@@ -1,14 +1,6 @@
 package edu.mymath;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.AsynchronousFileChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,7 +11,7 @@ import org.apache.commons.math3.primes.Primes;
  * @author Goran Lindqvist
  *
  */
-public class CalcPrimes implements Callable<String> {
+public class CalcPrimes extends Common implements Callable<String> {
 
 	private final int iThisPrimenr;
 	private boolean bCalcSerieOrNr = false;
@@ -34,8 +26,8 @@ public class CalcPrimes implements Callable<String> {
 	
 	/**
 	 * constructor 1
-	 * @param iNr
-	 * @param bSerieOrTestNr
+	 * @param iNr, int.
+	 * @param bSerieOrTestNr, boolean.
 	 */
 	public CalcPrimes(int iNr, boolean bSerieOrTestNr){
 		this.iThisPrimenr = iNr;
@@ -45,10 +37,10 @@ public class CalcPrimes implements Callable<String> {
 	
 	/**
 	 * constructor 2
-	 * @param iNr
-	 * @param bWrite
-	 * @param bSerieOrNr
-	 * @param sFullPathToTxt
+	 * @param iNr, int.
+	 * @param bWrite, boolean.
+	 * @param bSerieOrNr, boolean.
+	 * @param sFullPathToTxt, string.
 	 */
 	public CalcPrimes(int iNr, boolean bWrite, boolean bSerieOrNr, String sFullPathToTxt) {
 		this.iThisPrimenr = iNr;
@@ -103,6 +95,7 @@ public class CalcPrimes implements Callable<String> {
 	
 	/**
 	 * calcSeriesOfPrime
+	 * @return, string.
 	 */
 	@SuppressWarnings("unchecked")
 	private String calcSeriesOfPrime(){
@@ -120,7 +113,7 @@ public class CalcPrimes implements Callable<String> {
 			}//end for
 			log.info("CalcPrimes.isThisPrime: nr of count: " +j);
 			//write
-			boolean bol = writeDown(sBuf);
+			boolean bol = writeDownToFile(sBuf,sPath);
 			if(true == bol){
 				log.info("CalcPrimes.calcSeriesOfPrime:stop");
 				jObj.put("Primes", "Write primes to file... succeeded");
@@ -136,35 +129,5 @@ public class CalcPrimes implements Callable<String> {
 			log.error("ERROR:CalcPrimes.isThisPrime: " +ex.toString());
 			return "";
 		}
-	}
-	
-	/**
-	 * writeDown
-	 * @param sInput string buffer
-	 */
-	private boolean writeDown(StringBuffer sInput){
-		log.info("CalcPrimes.writeDown:start");
-		try{
-			Path pCreateFile = Paths.get(sPath);
-			if(!Files.exists(pCreateFile)){
-				Files.createFile(pCreateFile);
-			}
-			Path filePath = Paths.get(sPath);
-			AsynchronousFileChannel fileChannel;
-			fileChannel = AsynchronousFileChannel.open(filePath, StandardOpenOption.WRITE);
-			ByteBuffer buf = ByteBuffer.allocateDirect(10000000);
-			buf.put(sInput.toString().getBytes("ISO-8859-1"));
-			buf.flip();
-			Future<Integer> opr = fileChannel.write(buf, 0);
-			while(!opr.isDone()){};
-			buf.clear();
-			fileChannel.close();
-			log.info("CalcPrimes.writeDown:stop");
-		}catch(IOException ioex){
-			System.out.println("ERROR:CalcPrimes.writeDown: " +ioex.toString());
-			log.info("ERROR:CalcPrimes.writeDown: " +ioex.toString());
-			return false;
-		}
-		return true;
 	}
 }

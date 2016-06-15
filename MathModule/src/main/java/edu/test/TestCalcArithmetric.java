@@ -32,7 +32,7 @@ public class TestCalcArithmetric {
 		final ExecutorService expool;
 		final Future<String> sData;
 		expool = Executors.newFixedThreadPool(2);
-		sData = expool.submit(new CalcArithmetic(5, 4, "add"));
+		sData = expool.submit(new CalcArithmetic(5, 4, "add", true));
 		String jString = sData.get();
 		JSONParser jParser =  new JSONParser();
 		Object obj = jParser.parse(jString);
@@ -56,7 +56,7 @@ public class TestCalcArithmetric {
 		final ExecutorService expool;
 		final Future<String> sData;
 		expool = Executors.newFixedThreadPool(2);
-		sData = expool.submit(new CalcArithmetic(5, 7, "sub"));
+		sData = expool.submit(new CalcArithmetic(5, 7, "sub", false));
 		String jString = sData.get();
 		JSONParser jParser =  new JSONParser();
 		Object obj = jParser.parse(jString);
@@ -80,7 +80,7 @@ public class TestCalcArithmetric {
 		final ExecutorService expool;
 		final Future<String> sData;
 		expool = Executors.newFixedThreadPool(2);
-		sData = expool.submit(new CalcArithmetic(3, 17, "mult"));
+		sData = expool.submit(new CalcArithmetic(3, 17, "mult", false));
 		String jString = sData.get();
 		JSONParser jParser =  new JSONParser();
 		Object obj = jParser.parse(jString);
@@ -104,7 +104,7 @@ public class TestCalcArithmetric {
 		final ExecutorService expool;
 		final Future<String> sData;
 		expool = Executors.newFixedThreadPool(2);
-		sData = expool.submit(new CalcArithmetic(450, -12, "div"));
+		sData = expool.submit(new CalcArithmetic(450, -12, "div", false));
 		String jString = sData.get();
 		JSONParser jParser =  new JSONParser();
 		Object obj = jParser.parse(jString);
@@ -128,7 +128,7 @@ public class TestCalcArithmetric {
 		final ExecutorService expool;
 		final Future<String> sData;
 		expool = Executors.newFixedThreadPool(2);
-		sData = expool.submit(new CalcArithmetic(451, 0, "div"));
+		sData = expool.submit(new CalcArithmetic(451, 0, "div", false));
 		String jString = sData.get();
 		JSONParser jParser =  new JSONParser();
 		Object obj = jParser.parse(jString);

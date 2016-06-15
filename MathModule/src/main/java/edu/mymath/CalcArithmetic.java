@@ -10,24 +10,28 @@ import org.json.simple.JSONObject;
  * @author Goran Lindqvist
  *
  */
-public class CalcArithmetic implements Callable<String> {
+public class CalcArithmetic extends Common implements Callable<String> {
 
 	private int iNr1;
 	private int iNr2;
 	private String sOpr;
+	private Boolean bWrite;
+	private String sPath = "/home/goran/testing/logs/test2.txt";
 		
 	final static Logger log = Logger.getLogger(edu.mymath.CalcArithmetic.class); 
 	
 	/**
 	 * constructor
-	 * @param t1, int
-	 * @param t2, int
+	 * @param t1, int.
+	 * @param t2, int.
 	 * @param opr, add, sub, mult or div.
+	 * @param writeToFile, boolean.
 	 */
-	public CalcArithmetic(int t1, int t2, String opr){
+	public CalcArithmetic(int t1, int t2, String opr, Boolean writeToFile){
 		this.iNr1 = t1;
 		this.iNr2 = t2;
 		this.sOpr = opr;
+		this.bWrite = writeToFile;
 	}
 	
 	/**
@@ -38,9 +42,9 @@ public class CalcArithmetic implements Callable<String> {
 	}
 	
 	/**
-	 * simpleCalc
+	 * simpleCalc.
 	 * @param sKey, add, sub, mult or div.
-	 * @return String
+	 * @return String.
 	 */
 	@SuppressWarnings("unchecked")
 	private String simpleCalc(String sKey){
@@ -85,7 +89,6 @@ public class CalcArithmetic implements Callable<String> {
 				}
 				break;
 			}
-
 			default:
 				log.error("Choise add, sub, mult or div, not: " +sKey);
 				System.out.println("");
@@ -94,6 +97,15 @@ public class CalcArithmetic implements Callable<String> {
 				break;
 			}
 			jObj.put(sMathOpr, jList);
+			//write to file
+			if(true == bWrite){
+				StringBuffer sBuf = new StringBuffer();
+				sBuf.append("********************************").append("\n");
+				sBuf.append("********:" +sMathOpr+ ":********").append("\n");
+				sBuf.append(jObj.toJSONString());
+				writeDownToFile(sBuf,sPath);
+				log.info("CalcArithmetic.simpleCalc:write to file");					
+			}			
 			log.info("CalcArithmetic.simpleCalc: " +"opr "+ sKey +" :value " +dRes);
 		}catch(Exception ex){
 			System.err.println("ERROR:CalcArithmetic.simpleCalc: " +ex.toString());
