@@ -24,7 +24,7 @@ public class Common {
 	 * @param sInput string buffer.
 	 * @param sPathForFile, string.
 	 */
-	public boolean writeDownToFile(StringBuffer sInput, String sPathForFile){
+	protected boolean writeDownToFile(StringBuffer sInput, String sPathForFile){
 		log.info("Common.writeDown:start");
 		try{
 			Path pCreateFile = Paths.get(sPathForFile);
