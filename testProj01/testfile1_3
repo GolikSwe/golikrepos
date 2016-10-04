@@ -1,0 +1,9 @@
+#miles to kilometer
+
+data_in = input('Enter miles: ')
+data_in = int(data_in)
+
+#konvert
+calc = data_in*1.60934
+#print
+print("{} miles to km {}".format(data_in, calc))

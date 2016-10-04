@@ -1,0 +1,6 @@
+#test nr01
+
+#skapar variabel
+name = input('Skriv in namn: ')
+#skriver ut
+print('output: ',name)

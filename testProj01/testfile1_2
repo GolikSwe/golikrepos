@@ -1,0 +1,18 @@
+#Calc to variabler
+
+#input of two values
+num1, num2 = input('Skriv in tva heltalsvärden: ').split()
+#convert to int
+num1 = int(num1)
+num2 = int(num2)
+
+#add
+summa = num1+num2
+#mult
+prod = num1*num2
+#modulus
+mod = num1%num2
+#format 1 och 2
+print("1: {}+{}={}".format(num1, num2, summa))
+print("2: {}*{}={}".format(num1,num2,prod))
+print('modulus: ', mod)
