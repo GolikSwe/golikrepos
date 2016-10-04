@@ -9,5 +9,5 @@ antal_ar = int(antal_ar)
 print(procent)
 for i in range(1,antal_ar):
     kr = kr*procent
-    print("år  {}: {}".format(i, kr))
+    print("år {}: {}".format(i, kr))
 
